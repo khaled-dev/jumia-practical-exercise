@@ -24,4 +24,17 @@ class CountriesRepository
             return (new CountryDTO())->setCode($country['code'])->setName($country['name']);
         });
     }
+
+    /**
+     * Find country by code.
+     *
+     * @param $code
+     * @return CountryDTO
+     */
+    public static function find($code):? CountryDTO
+    {
+        return static::all()->filter(function ($country) use ($code) {
+            return $country->getCode() == $code;
+        })->first();
+    }
 }
