@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CustomerCollection;
-use App\Models\Customer;
-use App\Services\Builders\CustomerDataBuilder;
+use App\Repositories\CustomersRepository;
 use App\Services\CollectionService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 
 class CustomerController extends Controller
 {
@@ -23,22 +21,13 @@ class CustomerController extends Controller
      *
      * @param Request $request
      * @return CustomerCollection
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function index(Request $request): CustomerCollection
     {
-        $customers = (new CustomerDataBuilder)->setData(Customer::get());
-
-        if (isset($request->country_code)) {
-            $customers = $customers->filterByCountryCode($request->country_code);
-        }
-
-        if (isset($request->is_phone_valid)) {
-            $customers = $customers->filterByPhoneValidState($request->is_phone_valid);
-        }
-
         return new CustomerCollection(
             CollectionService::paginate(
-                $customers->build(), $this->perPage
+                CustomersRepository::all($request->country_code, $request->is_phone_valid), $this->perPage
             )
         );
     }
