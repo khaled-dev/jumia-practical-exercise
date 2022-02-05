@@ -45,12 +45,12 @@ class CustomerDataBuilder
     }
 
     /**
-     * Filter customer data by customer code.
+     * Filter customer data by customer country code.
      *
-     * @param bool $code
+     * @param string $code
      * @return $this
      */
-    public function filterByCode(bool $code): CustomerDataBuilder
+    public function filterByCountryCode(string $code): CustomerDataBuilder
     {
         $this->data = $this->data->filter(function (CustomerDTO $customer) use($code) {
             return $customer->getCode() == $code;
@@ -65,7 +65,7 @@ class CustomerDataBuilder
      * @param bool $state
      * @return $this
      */
-    public function filterByState(bool $state): CustomerDataBuilder
+    public function filterByPhoneValidState(bool $state): CustomerDataBuilder
     {
         $this->data = $this->data->filter(function (CustomerDTO $customer) use($state) {
             return $customer->getState() == $state;
