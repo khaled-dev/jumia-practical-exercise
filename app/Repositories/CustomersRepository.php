@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Customer;
 use App\Services\Builders\CustomerDataBuilder;
+use App\Services\DataTransferObjects\CustomerDTO;
 use Illuminate\Support\Collection;
 
 class CustomersRepository
@@ -28,5 +29,19 @@ class CustomersRepository
         }
 
         return $customers->build();
+    }
+
+    /**
+     * Find customer by id
+     *
+     * @param int $id
+     * @return null|CustomerDTO
+     */
+    public static function find(int $id):? CustomerDTO
+    {
+        return (new CustomerDataBuilder)
+            ->setData(Customer::where('id', $id)->get())
+            ->build()
+            ->first();
     }
 }
