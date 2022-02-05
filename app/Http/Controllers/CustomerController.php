@@ -21,14 +21,24 @@ class CustomerController extends Controller
     /**
      * List all customers.
      *
+     * @param Request $request
      * @return CustomerCollection
      */
-    public function index(): CustomerCollection
+    public function index(Request $request): CustomerCollection
     {
+        $customers = (new CustomerDataBuilder)->setData(Customer::get());
+
+        if (isset($request->country_code)) {
+            $customers = $customers->filterByCountryCode($request->country_code);
+        }
+
+        if (isset($request->is_phone_valid)) {
+            $customers = $customers->filterByPhoneValidState($request->is_phone_valid);
+        }
+
         return new CustomerCollection(
             CollectionService::paginate(
-                (new CustomerDataBuilder)->setData(Customer::get())->build()
-                , $this->perPage
+                $customers->build(), $this->perPage
             )
         );
     }
