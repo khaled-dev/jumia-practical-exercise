@@ -89,6 +89,8 @@ export default {
           this.params[key] = value
         }
 
+        this.params.page = null
+
         this.loadCustomers()
       },
 
