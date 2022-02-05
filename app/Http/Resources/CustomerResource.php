@@ -21,6 +21,7 @@ class CustomerResource extends JsonResource
             'code' => $this->getCode(),
             'state' => $this->getState(),
             'phone' => $this->getPhone(),
+            'country' => $this->getCountry(),
         ];
     }
 }
