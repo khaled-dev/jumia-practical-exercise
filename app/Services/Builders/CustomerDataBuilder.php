@@ -3,6 +3,7 @@
 namespace App\Services\Builders;
 
 use App\Models\Concerns\Collections\CustomersCollection;
+use App\Repositories\CountriesRepository;
 use App\Services\DataTransferObjects\CustomerDTO;
 use App\Services\PhoneNumberService;
 use Illuminate\Support\Collection;
@@ -34,11 +35,14 @@ class CustomerDataBuilder
     public function setData(CustomersCollection $customerData): CustomerDataBuilder
     {
         $this->data = $customerData->map(function ($customer) {
+            $countryCode = PhoneNumberService::getCode($customer->phone);
+
             return (new CustomerDTO())
                 ->setName($customer->name)
                 ->setState(PhoneNumberService::validate($customer->phone))
-                ->setCode(PhoneNumberService::getCode($customer->phone))
-                ->setPhone(PhoneNumberService::getPhone($customer->phone));
+                ->setCode($countryCode)
+                ->setPhone(PhoneNumberService::getPhone($customer->phone))
+                ->setCountry(($country = CountriesRepository::find($countryCode)) ? $country->getName() : '');
         });
 
         return $this;
