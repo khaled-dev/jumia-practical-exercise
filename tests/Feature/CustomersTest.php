@@ -41,6 +41,7 @@ class CustomersTest extends TestCase
                             ->where('code', $customers->first()->getCode())
                             ->where('state', $customers->first()->getState())
                             ->where('phone', $customers->first()->getPhone())
+                            ->where('country', $customers->first()->getCountry())
                             ->etc();
                         }
                     );
@@ -72,6 +73,7 @@ class CustomersTest extends TestCase
                             ->where('code', $foundCustomer->getCode())
                             ->where('state', $foundCustomer->getState())
                             ->where('phone', $foundCustomer->getPhone())
+                            ->where('country', $foundCustomer->getCountry())
                             ->etc();
                         }
                     );
@@ -104,6 +106,7 @@ class CustomersTest extends TestCase
                             ->where('code', $foundCustomer->getCode())
                             ->where('state', $foundCustomer->getState())
                             ->where('phone', $foundCustomer->getPhone())
+                            ->where('country', $foundCustomer->getCountry())
                             ->etc();
                         }
                     );
