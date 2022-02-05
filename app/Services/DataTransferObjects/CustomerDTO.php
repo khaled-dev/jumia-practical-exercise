@@ -28,6 +28,12 @@ class CustomerDTO
      */
     protected $phone;
 
+    /**
+     *
+     * @var string
+     */
+    protected $country;
+
 
     /**
      * Set customer name
@@ -119,6 +125,29 @@ class CustomerDTO
     public function getPhone(): string
     {
         return $this->phone;
+    }
+
+    /**
+     * Set customer country
+     *
+     * @param string $country
+     * @return $this
+     */
+    public function setCountry(string $country): CustomerDTO
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get customer country
+     *
+     * @return string
+     */
+    public function getCountry(): string
+    {
+        return $this->country;
     }
 
 }
