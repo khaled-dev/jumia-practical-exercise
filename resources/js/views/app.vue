@@ -35,8 +35,8 @@
                 <tr>
                     <td>{{ customer.name }}</td>
                     <td>{{ customer.country }}</td>
-                    <td>{{ customer.state }}</td>
-                    <td>{{ customer.code }}</td>
+                    <td>{{ customer.state ? 'OK' : 'NOK' }}</td>
+                    <td>{{ '+' + customer.code }}</td>
                     <td>{{ customer.phone }}</td>
                 </tr>
             </tbody>
