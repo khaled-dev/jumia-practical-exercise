@@ -22,6 +22,13 @@ class Customer extends Model
     protected $table = 'customer';
 
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Create a new Eloquent Collection instance.
      *
      * @param array $models
