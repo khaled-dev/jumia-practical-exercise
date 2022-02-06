@@ -28,7 +28,7 @@ docker-compose up
 
 ###
 
-> If port 80 already taken, try to change the env variable `APP_PORT` and rerun the preves command
+> If port 80 already taken, try to change the env variable `APP_PORT` and rerun the previous command
 
 #### Build VueJs views
 ```
